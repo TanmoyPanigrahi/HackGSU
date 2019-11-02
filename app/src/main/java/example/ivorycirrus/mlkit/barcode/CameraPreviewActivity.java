@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -22,7 +23,17 @@ import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOption
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 
+import java.io.IOException;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Camera Preview Activity
@@ -33,6 +44,7 @@ public class CameraPreviewActivity extends AppCompatActivity {
     private Camera mCamera;
     private CameraView camView;
     private OverlayView overlay;
+    public static String barcodeid = "";
     private double overlayScale = -1;
 
     private interface OnBarcodeListener {
@@ -56,6 +68,101 @@ public class CameraPreviewActivity extends AppCompatActivity {
         findViewById(R.id.btn_finish_preview).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //Call API
+                OkHttpClient client = new OkHttpClient();
+
+                String url = "https://hackgsu-257800.appspot.com/shop/add-item-by-code/";
+
+                RequestBody formBody = new FormBody.Builder()
+                        .add("id", barcodeid)
+                        .add("nothing", "")
+                        .build();
+                formBody = RequestBody.create(MediaType.parse("application/json"), "{\"id\":" + "\"" + barcodeid + "\"}" );
+
+                Request request = new Request.Builder()
+                        .url(url)
+                        .addHeader("Content-Type", "application/json")
+                        .post(formBody)
+                        .build();
+
+
+                Log.d("Hello", "Built request");
+                Log.d("Request", request.toString());
+
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        barcodeid,
+                        Toast.LENGTH_SHORT);
+
+                toast.show();
+
+                Log.d("Hello", "Going to call");
+
+
+                client.newCall(request).enqueue(new Callback() {
+                    //Response failed
+                    @Override
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                        Log.d("tag", "FAILURE");
+                        Toast toast = Toast.makeText(getApplicationContext(),
+                                "FAIL",
+                                Toast.LENGTH_SHORT);
+                        toast.show();
+                        e.printStackTrace();
+                    }
+
+                    //Response is successful
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+//                        Toast toast = Toast.makeText(getApplicationContext(),
+//                                "In response",
+//                                Toast.LENGTH_SHORT);
+//                        toast.show();
+                        Log.d("alakazam", response.body().string());
+                        Log.d("Hello", "In onResponse");
+                        String myResponse;
+                        if (response.isSuccessful()) {
+//                            myResponse = response.body().string();
+//                            Toast toast = Toast.makeText(getApplicationContext(),
+//                                    myResponse,
+//                                    Toast.LENGTH_SHORT);
+//                            toast.show();
+//                            Log.d("myrespo",myResponse);
+//
+//                            try {
+//                                List<String> list = new ArrayList<>();
+//                                JSONArray arr = new JSONArray(myResponse);
+//                                item i = new item();
+//                                for (int x = 0; x < arr.length(); x++) {
+//                                    list.add(arr.getJSONObject(x).get("name") + " - $" + arr.getJSONObject(x).get("price"));
+//                                }
+//                                Log.d("json", list.toString());
+//                        Log.d("json", jsonObject.toString());
+//                        Log.d("data", jsonObject.get("id").toString());
+//                        JSONObject jsonObject = new JSONObject(myResponse);
+//                        JSONArray jsonArray = jsonObject.getJSONArray("snapshot");
+//                        jsonObject = jsonArray.getJSONObject(0);
+//                        jsonObject = jsonObject.getJSONObject("shortDescription");
+//                        jsonArray = jsonObject.getJSONArray("values");
+//                        jsonObject = jsonArray.getJSONObject(0);
+//                        //jsonObject = jsonObject.getJSONObject("value");
+//                        String item = jsonObject.getString("value");
+//                        //Food food = new Food(item, "0");
+//                        //foodAdapter.add(food);
+//                        //food[0] = item;
+//                        //ListAdapter foodAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, food);
+//                                Log.d("rs",myResponse);
+
+//                            } catch (Exception JSONException) {
+//                                Log.d("Hello" ,"Unsuccessful with error");
+//
+//                            }
+                        } else {
+                            Log.d("Hello", "Unsuccessful");
+                        }
+                    }
+                });
+
                 CameraPreviewActivity.this.finish();
             }
         });
@@ -198,7 +305,7 @@ public class CameraPreviewActivity extends AppCompatActivity {
             // Task completed successfully
             for (FirebaseVisionBarcode barcode: barcodes) {
                 Log.d("Barcode", "value : "+barcode.getRawValue());
-
+                CameraPreviewActivity.barcodeid = barcode.getRawValue();
                 int valueType = barcode.getValueType();
                 if (valueType == FirebaseVisionBarcode.TYPE_ISBN) {
                     mBarcodeDetectedListener.onIsbnDetected(barcode);

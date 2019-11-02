@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Georgia Tech-MLKitBarcodeAndroid.iml" filepath="$PROJECT_DIR$/Georgia Tech-MLKitBarcodeAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/MLKitBarcodeAndroid.iml" filepath="$PROJECT_DIR$/MLKitBarcodeAndroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/MLKitBarcodeAndroid-app.iml" filepath="$PROJECT_DIR$/app/MLKitBarcodeAndroid-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

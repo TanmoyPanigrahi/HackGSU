@@ -38,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
                 startCartActivity();
             }
         });
+
+        findViewById(R.id.explore).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startExploreActivity();
+            }
+        });
     }
 
     /** Go to camera preview */
@@ -48,6 +55,10 @@ public class MainActivity extends AppCompatActivity {
     //Go to Cart
     private void startCartActivity(){
         startActivity(new Intent(this, CartActivity.class));
+    }
+
+    private void startExploreActivity(){
+        startActivity(new Intent(this, ExploreActivity.class));
     }
 
     /** Request permission and check */
