@@ -25,4 +25,15 @@
         android:text="@string/result_isbn_not_detected"
         app:layout_constraintTop_toTopOf="@id/btn_show_preview_activity" />
 
+    <Button
+        android:id="@+id/cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="71dp"
+        android:text="cart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_isbn" />
+
 </android.support.constraint.ConstraintLayout>

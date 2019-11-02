@@ -31,11 +31,23 @@ public class MainActivity extends AppCompatActivity {
                 if(isPermissionGranted()) startCameraPreviewActivity();
             }
         });
+
+        findViewById(R.id.cart).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startCartActivity();
+            }
+        });
     }
 
     /** Go to camera preview */
     private void startCameraPreviewActivity(){
         startActivity(new Intent(this, CameraPreviewActivity.class));
+    }
+
+    //Go to Cart
+    private void startCartActivity(){
+        startActivity(new Intent(this, CartActivity.class));
     }
 
     /** Request permission and check */

@@ -27,6 +27,11 @@
             android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
 
+        <activity
+            android:name=".CartActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+        </activity>
+
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="barcode" />
