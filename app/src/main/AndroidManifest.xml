@@ -10,7 +10,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="SmartPayAR"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -24,6 +24,11 @@
 
         <activity
             android:name=".CameraPreviewActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".Balance"
             android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
 

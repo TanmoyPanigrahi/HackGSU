@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     // Permission Request Code
     private int RESULT_PERMISSIONS = 0x9000;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,12 +41,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.explore).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startExploreActivity();
-            }
-        });
+//        findViewById(R.id.btbalance).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startBalanceActivity();
+//            }
+//        });
+
+//        findViewById(R.id.explore).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startExploreActivity();
+//            }
+//        });
     }
 
     /** Go to camera preview */
@@ -57,9 +66,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, CartActivity.class));
     }
 
-    private void startExploreActivity(){
-        startActivity(new Intent(this, ExploreActivity.class));
+    private void startBalanceActivity(){
+        startActivity(new Intent(this, Balance.class));
     }
+
+//    private void startExploreActivity(){
+//
+//    }
 
     /** Request permission and check */
     private boolean isPermissionGranted(){

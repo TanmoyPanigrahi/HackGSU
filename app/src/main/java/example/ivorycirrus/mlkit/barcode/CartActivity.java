@@ -17,6 +17,7 @@ import android.widget.ListView;
 import java.io.IOException;
 import java.util.ArrayList;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -182,6 +183,20 @@ public class CartActivity extends AppCompatActivity{
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Toast.makeText(getApplicationContext(), "Payment Successful!!" ,Toast.LENGTH_LONG).show();
+
+                CartActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                                CartActivity.this,
+                                android.R.layout.simple_list_item_1,
+                                new ArrayList<String>() );
+                        lv.setAdapter(arrayAdapter);
+                    }
+                });
+
                 CartActivity.this.finish();
             }
         });

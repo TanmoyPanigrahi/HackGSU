@@ -1,5 +1,6 @@
 package example.ivorycirrus.mlkit.barcode;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.ImageFormat;
 import android.graphics.Rect;
@@ -46,6 +47,10 @@ public class CameraPreviewActivity extends AppCompatActivity {
     private OverlayView overlay;
     public static String barcodeid = "";
     private double overlayScale = -1;
+
+    public static String getBarcodeid() {
+        return barcodeid;
+    }
 
     private interface OnBarcodeListener {
         void onIsbnDetected(FirebaseVisionBarcode barcode);
@@ -166,6 +171,15 @@ public class CameraPreviewActivity extends AppCompatActivity {
                 CameraPreviewActivity.this.finish();
             }
         });
+
+
+        findViewById(R.id.btn_explore).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CameraPreviewActivity.this, ExploreActivity.class));
+            }
+        });
+
 
         // Initialize Camera
         mCamera = getCameraInstance();

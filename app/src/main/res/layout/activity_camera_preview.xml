@@ -9,7 +9,10 @@
     <FrameLayout
         android:id="@+id/frm_preview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="-65dp"></FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,8 +21,14 @@
 
         <Button
             android:id="@+id/btn_finish_preview"
-            android:layout_width="match_parent"
+            android:layout_width="203dp"
             android:layout_height="wrap_content"
-            android:text="Finish Preview" />
+            android:text="Add To Cart" />
+
+        <Button
+            android:id="@+id/btn_explore"
+            android:layout_width="206dp"
+            android:layout_height="wrap_content"
+            android:text="Explore" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
